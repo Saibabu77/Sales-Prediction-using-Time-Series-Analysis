@@ -1,23 +1,21 @@
-# Sales-Prediction-using-Time-Series-Analysis
-Sales prediction using Time Series Analysis
-# 📊 Time Series Analysis & Forecasting with ARIMA and Prophet
+# Time Series Analysis and Forecasting
 
-This repository contains an end-to-end time series analysis pipeline including decomposition, stationarity testing, ARIMA modeling, and Prophet-based forecasting. It leverages various visualization tools such as Plotly and Matplotlib to understand seasonal trends and forecast future values.
+This project is a complete pipeline for time series analysis, modeling, and forecasting using ARIMA and Prophet. It also includes visualizations for data understanding and trend analysis.
 
 ---
 
-## 📁 Dataset
+## Dataset
 
-- **File:** `Month_Value_1.csv`  
-- **Target:** `Revenue`, `Sales_quantity`, `Average_cost`, `The_average_annual_payroll_of_the_region`  
-- **Date Column:** `Date`  
-- **Objective:** Analyze and forecast trends using time series modeling techniques.
+- **File:** `Month_Value_1.csv`
+- **Target Columns:** `Revenue`, `Sales_quantity`, `Average_cost`, `The_average_annual_payroll_of_the_region`
+- **Date Column:** `Date`
+- **Goal:** Analyze trends and forecast future values for key metrics.
 
 ---
 
-## 🔍 Project Breakdown
+## Project Structure
 
-### 1. Load & Prepare Data
+### 1. Load and Prepare Data
 
 ```python
 import pandas as pd
@@ -29,9 +27,9 @@ df['Date'] = pd.to_datetime(df['Date'])
 
 ---
 
-### 2. Data Visualization & Exploration
+### 2. Data Visualization and Exploration
 
-#### 📈 Line Plot with Plotly
+#### Line Plot
 
 ```python
 import plotly.express as px
@@ -39,20 +37,18 @@ import plotly.express as px
 df['Month_Year'] = df['Date'].dt.to_period('M').dt.to_timestamp()
 df_melted = df.melt(id_vars=['Month_Year'], value_vars=df.columns[1:-1],
                     var_name='Category', value_name='Value')
-
-fig = px.line(df_melted, x='Month_Year', y='Value', color='Category',
-              title='Monthly Trend by Category')
+fig = px.line(df_melted, x='Month_Year', y='Value', color='Category')
 fig.show()
 ```
 
-#### 📊 Stacked Bar Plot
+#### Stacked Bar Plot
 
 ```python
 fig = px.bar(df, x='Month_Year', y=df.columns[1:], barmode='stack')
 fig.show()
 ```
 
-#### 📉 Scatter Plot with Trendline
+#### Scatter Plot with Trendline
 
 ```python
 fig = px.scatter(df, x='Sales_quantity', y='Average_cost',
@@ -62,7 +58,7 @@ fig.show()
 
 ---
 
-### 3. Imputation & Correlation Analysis
+### 3. Imputation and Correlation
 
 ```python
 from sklearn.impute import KNNImputer
@@ -71,7 +67,7 @@ imputer = KNNImputer()
 df[columns_to_impute] = imputer.fit_transform(df[columns_to_impute])
 ```
 
-#### 🔥 Correlation Heatmap
+#### Correlation Heatmap
 
 ```python
 import seaborn as sns
@@ -84,14 +80,14 @@ plt.show()
 
 ---
 
-### 4. Stationarity & Decomposition
+### 4. Stationarity and Decomposition
 
 ```python
 from statsmodels.tsa.stattools import adfuller
 result = adfuller(df['Average_cost'])
 ```
 
-#### 🔄 Seasonal Decomposition
+#### Seasonal Decomposition
 
 ```python
 from statsmodels.tsa.seasonal import seasonal_decompose
@@ -129,21 +125,23 @@ forecast = model.predict(future)
 
 ---
 
-## 🛠 Tools Used
+## Tools
 
-- Python (Pandas, Scikit-learn, Prophet, Statsmodels)
-- Visualization: Plotly, Seaborn, Matplotlib
-- Forecasting Models: ARIMA, Prophet
-- Feature Engineering: Differencing, Lag Features
+- Python: pandas, numpy, seaborn, matplotlib, statsmodels, prophet
+- Visualization: plotly
+- Models: ARIMA, Prophet
+- Feature Engineering: Differencing, Lagging, Scaling
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
-1. Clone this repository  
-2. Place `Month_Value_1.csv` in the root folder  
-3. Install requirements:  
-   ```bash
-   pip install pandas numpy plotly seaborn matplotlib statsmodels prophet
-   ```
-4. Run the notebook or script to view results and plots  
+1. Clone the repo
+2. Add `Month_Value_1.csv` to the root folder
+3. Install required packages:
+
+```bash
+pip install pandas numpy seaborn matplotlib statsmodels prophet plotly
+```
+
+4. Run the script or notebook
