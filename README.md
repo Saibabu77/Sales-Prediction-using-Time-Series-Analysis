@@ -125,6 +125,13 @@ forecast = model.predict(future)
 
 ---
 
+
+![image](https://github.com/user-attachments/assets/3c9a4e42-1cf3-4772-adfb-346c62f69a1a)
+
+he Prophet forecast indicates a stable upward trend from 2015 through 2021, with several changepoints identified throughout the timeline. Actual values during this period remain relatively flat, suggesting limited variability or possibly imprecise input data. After 2021, the forecast becomes highly erratic, with significant oscillations and widened confidence intervals, pointing to increased uncertainty in future predictions. These fluctuations may reflect an overfitted model or issues in seasonality assumptions. The presence of repeated sharp peaks and troughs suggests that the model is struggling to generalize beyond the training period. Additionally, the mismatch between actual and predicted values implies potential data quality or preprocessing problems. Overall, the model's performance is reliable during the historical window but needs refinement to produce stable future projections.
+
+
+
 ## Tools
 
 - Python: pandas, numpy, seaborn, matplotlib, statsmodels, prophet
